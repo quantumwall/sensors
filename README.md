@@ -1,0 +1,2 @@
+# sensors
+Show cpu temperature
