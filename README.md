@@ -1,2 +1,2 @@
 # sensors
-Show cpu temperature
+View the CPU temperature given the maximum and minimum temperature timestamps
