@@ -6,7 +6,7 @@ function  current_time() {
 }
 
 function current_temp() {
-    return `sensors`;
+    return `sensors | grep Package | cut -f5 -d ' ' | grep -Eo '[0-9]{1,}' | head -n1 | tr -d '\n'`;
 }
 
 function colored($text, $color) {
@@ -41,7 +41,8 @@ function color_of_temp($temp) {
 $start_time = current_time();
 $hours = $minutes = $seconds = 0;
 $min_temp_time = $current_time = $max_temp_time = current_time();
-$min_temp = $current_temp = $max_temp = rand(46, 77);
+#$min_temp = $current_temp = $max_temp = rand(46, 77);
+$min_temp = $current_temp = $max_temp = current_temp();
 while (true) {
     if ($current_temp < $min_temp) {
         $min_temp = $current_temp;
@@ -72,7 +73,7 @@ while (true) {
     echo "Current temperature -\t".colored($current_temp, color_of_temp($current_temp))."\n";
     echo "Maximum temperature -\t".colored($max_temp, color_of_temp($max_temp))." at $max_temp_time";
     echo "Minimum temperature -\t".colored($min_temp, color_of_temp($min_temp))." at $min_temp_time";
-    $current_temp = rand(46, 77);
+    $current_temp = current_temp();
     $current_time = current_time();
     sleep(1);
 } 
